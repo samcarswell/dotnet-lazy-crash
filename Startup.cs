@@ -28,8 +28,14 @@ namespace DotNetCoreSqlDb
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddDbContext<MyDatabaseContext>(options =>
-                    options.UseSqlite("Data Source=localdatabase.db"));
+            services.AddDbContext<MyDatabaseContext>(options => options.UseLazyLoadingProxies()
+                .EnableSensitiveDataLogging()
+                .UseSqlServer("Server=127.0.0.1,1433; Database=test_database; User Id=sa;Password=yourStrong(!)Password;",
+                    sqlOptions => sqlOptions
+                        .CommandTimeout(1800)
+                        .EnableRetryOnFailure()
+                )
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

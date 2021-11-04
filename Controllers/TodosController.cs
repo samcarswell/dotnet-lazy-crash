@@ -34,6 +34,7 @@ namespace DotNetCoreSqlDb.Controllers
 
             var todo = await _context.Todo
                 .FirstOrDefaultAsync(m => m.ID == id);
+            // Debugging todo here will cause the debugger to crash
             if (todo == null)
             {
                 return NotFound();

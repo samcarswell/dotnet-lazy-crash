@@ -1,10 +1,8 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DotNetCoreSqlDb.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,11 +10,10 @@ namespace DotNetCoreSqlDb.Migrations
                 name: "Todo",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Description = table.Column<string>(nullable: true),
-                    CreatedDate = table.Column<DateTime>(nullable: false)
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedDate = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
